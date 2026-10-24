@@ -17,21 +17,21 @@ export default function Home() {
     setLoading(true);
     setTimeout(() => {
       setSummary(
-        `Results-oriented ${jobTitle} professional based in ${country} with a strong background in driving growth, managing dynamic teams, and delivering optimized solutions tailored for international standard applications.`
+        `Results-oriented ${jobTitle} professional based in ${country} with a strong background in driving growth and delivering optimized, ATS-compliant solutions.`
       );
       setLoading(false);
-    }, 1000);
+    }, 800);
   };
 
   return (
-    <div className="min-h-screen bg-slate-50 text-slate-900 p-8">
-      <div className="max-w-4xl mx-auto bg-white p-8 rounded-xl shadow-md border border-slate-200">
-        <h1 className="text-3xl font-bold mb-2 text-indigo-600">AI Resume Builder SaaS</h1>
-        <p className="text-slate-600 mb-6">Create ATS-Compliant Resumes for Global Job Markets</p>
+    <div className="min-h-screen bg-slate-100 p-8 text-slate-900 font-sans">
+      <div className="max-w-2xl mx-auto bg-white p-6 rounded-xl shadow-md border border-slate-200">
+        <h1 className="text-2xl font-bold mb-2 text-indigo-600">AI Resume Builder SaaS</h1>
+        <p className="text-slate-600 mb-6 text-sm">Target regional standards (USA, EU, GCC) and generate ATS-friendly summaries.</p>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
+        <div className="space-y-4">
           <div>
-            <label className="block text-sm font-medium mb-1">Target Region / Country</label>
+            <label className="block text-sm font-medium mb-1">Target Region</label>
             <select
               value={country}
               onChange={(e) => setCountry(e.target.value)}
@@ -39,7 +39,7 @@ export default function Home() {
             >
               <option value="US">United States (Standard ATS)</option>
               <option value="EU">Europe (Europass Compatible)</option>
-              <option value="UAE">UAE / GCC (Gulf Region)</option>
+              <option value="UAE">UAE / GCC Region</option>
             </select>
           </div>
 
@@ -54,7 +54,7 @@ export default function Home() {
             />
           </div>
 
-          <div className="md:col-span-2">
+          <div>
             <label className="block text-sm font-medium mb-1">Job Title / Role</label>
             <input
               type="text"
@@ -64,22 +64,22 @@ export default function Home() {
               className="w-full border p-2 rounded-lg bg-slate-50"
             />
           </div>
+
+          <button
+            onClick={handleGenerate}
+            disabled={loading}
+            className="w-full bg-indigo-600 text-white font-semibold py-2.5 rounded-lg hover:bg-indigo-700 transition"
+          >
+            {loading ? "Generating Summary..." : "Generate AI Resume Summary"}
+          </button>
+
+          {summary && (
+            <div className="mt-4 p-4 bg-slate-50 border rounded-lg">
+              <h2 className="font-semibold text-slate-800 mb-1">Generated Professional Summary:</h2>
+              <p className="text-slate-700 text-sm leading-relaxed">{summary}</p>
+            </div>
+          )}
         </div>
-
-        <button
-          onClick={handleGenerate}
-          disabled={loading}
-          className="w-full bg-indigo-600 hover:bg-indigo-700 text-white font-semibold py-3 rounded-lg transition"
-        >
-          {loading ? "Generating Professional Summary..." : "Generate AI Resume Summary"}
-        </button>
-
-        {summary && (
-          <div className="mt-6 p-4 bg-slate-100 rounded-lg border border-slate-200">
-            <h2 className="font-semibold text-lg text-slate-800 mb-2">Generated Professional Summary:</h2>
-            <p className="text-slate-700">{summary}</p>
-          </div>
-        )}
       </div>
     </div>
   );
